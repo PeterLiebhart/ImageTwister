@@ -1,4 +1,4 @@
-package com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.Components;
+package com.PeterLiebhart.ImageTwister.Views.MainView.Components;
 
 import com.vaadin.flow.component.html.Image;
 import org.springframework.stereotype.Service;

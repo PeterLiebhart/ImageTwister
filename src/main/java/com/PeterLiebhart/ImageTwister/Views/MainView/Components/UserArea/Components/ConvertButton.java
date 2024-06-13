@@ -20,6 +20,7 @@ public class ConvertButton {
         button.addClickListener(event -> {
             imageConverter.convert(httpSession);
         });
+
         return button;
     }
 }

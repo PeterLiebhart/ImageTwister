@@ -1,6 +1,6 @@
 package com.PeterLiebhart.ImageTwister.Views.MainView;
 
-import com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.Components.LogoImage;
+import com.PeterLiebhart.ImageTwister.Views.MainView.Components.LogoImage;
 import com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.UserArea;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;

@@ -1,6 +1,7 @@
 package com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea;
 
 import com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.Components.ConvertButton;
+import com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.Components.DownloadButton;
 import com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.Components.FormatRadio;
 import com.PeterLiebhart.ImageTwister.Views.MainView.Components.UserArea.Components.UploadForm;
 import com.vaadin.flow.component.html.H1;
@@ -15,9 +16,11 @@ public class UserArea {
     private final ConvertButton convertButton;
     private final FormatRadio formatRadio;
     private final UploadForm uploadForm;
+    private final DownloadButton downloadButton;
 
-    public UserArea(ConvertButton convertButton, FormatRadio formatRadio, UploadForm uploadForm) {
+    public UserArea(ConvertButton convertButton, FormatRadio formatRadio, UploadForm uploadForm, DownloadButton downloadButton) {
 
+        this.downloadButton = downloadButton;
         this.convertButton = convertButton;
         this.formatRadio = formatRadio;
         this.uploadForm = uploadForm;
@@ -34,7 +37,8 @@ public class UserArea {
                 new H1("Convert your image"),
                 formatRadio.get(httpSession),
                 uploadForm.get(httpSession),
-                convertButton.get(httpSession)
+                convertButton.get(httpSession),
+                downloadButton.get(httpSession)
         );
 
         return layout;

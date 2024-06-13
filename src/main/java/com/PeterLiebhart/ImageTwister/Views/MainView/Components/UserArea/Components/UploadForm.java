@@ -32,7 +32,7 @@ public class UploadForm {
             System.out.println(httpSession.getAttribute("original-file-name"));
             System.out.println(httpSession.getAttribute("original-image"));
         });
-        upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/jpg", "image/jpeg");
+        upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/jpg", "image/jpeg", "image/bmp");
         return upload;
     }
 }
