@@ -23,8 +23,9 @@ import java.io.IOException;
 public class UserArea {
 
     private final ImageConverter imageConverter;
-    private VerticalLayout layout;
+    private final VerticalLayout layout;
     private Anchor downloadButton;
+    private Upload uploadForm;
 
     @Autowired
     public UserArea(ImageConverter imageConverter) {
@@ -56,7 +57,7 @@ public class UserArea {
 
     public Anchor getDownloadButton(HttpSession httpSession) {
         StreamResource resource = new StreamResource(
-                httpSession.getAttribute("original-file-name-without-extension") + "." + httpSession.getAttribute("desired-format"),
+                "converted-image" + "." + httpSession.getAttribute("desired-format"),
                 () -> new ByteArrayInputStream((byte[]) httpSession.getAttribute("converted-image"))
         );
 
@@ -97,11 +98,7 @@ public class UserArea {
                 throw new RuntimeException(e);
             }
 
-            httpSession.setAttribute("original-file-name-without-extension", fileName.split("\\.")[0]);
             httpSession.setAttribute("original-image", imageByteArray);
-            httpSession.setAttribute("original-file-name", fileName);
-            System.out.println(httpSession.getAttribute("original-file-name"));
-            System.out.println(httpSession.getAttribute("original-image"));
         });
         upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/jpg", "image/jpeg", "image/bmp", "image/tiff");
         return upload;
