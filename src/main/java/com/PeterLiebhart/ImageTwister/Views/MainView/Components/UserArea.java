@@ -12,7 +12,6 @@ import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.spring.annotation.UIScope;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
@@ -27,12 +26,12 @@ public class UserArea {
     private Anchor downloadButton;
     private Upload uploadForm;
 
-    @Autowired
     public UserArea(ImageConverter imageConverter) {
         this.imageConverter = imageConverter;
         this.layout = new VerticalLayout();
     }
 
+    //The whole User-Area as one
     public VerticalLayout get(HttpSession httpSession) {
 
         layout.setWidth("50%");
@@ -49,12 +48,14 @@ public class UserArea {
         return layout;
     }
 
+    //Convert Button Component
     public Button getConvertButton(HttpSession httpSession) {
         Button button = new Button("Convert your image");
         button.addClickListener(event -> imageConverter.convert(httpSession));
         return button;
     }
 
+    //Download Button Component
     public Anchor getDownloadButton(HttpSession httpSession) {
         StreamResource resource = new StreamResource(
                 "converted-image" + "." + httpSession.getAttribute("desired-format"),
@@ -69,6 +70,7 @@ public class UserArea {
         return downloadLink;
     }
 
+    //Format Radio Component
     public RadioButtonGroup<String> getFormatRadio(HttpSession httpSession) {
         RadioButtonGroup<String> formatRadio = new RadioButtonGroup<>();
         formatRadio.setLabel("Target format");
@@ -76,7 +78,7 @@ public class UserArea {
 
         formatRadio.addValueChangeListener(event -> {
             httpSession.setAttribute("desired-format", event.getValue().toLowerCase());
-            layout.remove(downloadButton); // Remove the existing download button
+            layout.remove(downloadButton); // Remove the existing download button (wrong desired format attached)
             downloadButton = getDownloadButton(httpSession); // Recreate the download button
             layout.add(downloadButton); // Add the new download button
         });
@@ -84,6 +86,7 @@ public class UserArea {
         return formatRadio;
     }
 
+    //Upload Form Component
     public Upload getUploadForm(HttpSession httpSession) {
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
@@ -103,5 +106,6 @@ public class UserArea {
         upload.setAcceptedFileTypes("image/jpeg", "image/png", "image/jpg", "image/jpeg", "image/bmp", "image/tiff");
         return upload;
     }
+
 
 }
